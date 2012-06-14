@@ -170,3 +170,25 @@ Array.prototype.invoke = function() {
     });
 };
 
+
+
+(function() {
+    /**
+     * Converts string to namespace (object hierarchy) and returns its last part.
+     *
+     * @return {Object} Last part of created namespace.
+     */
+    function toNamespace() {
+        var result = window;
+        var parts = this.split('.');
+        var i = 0;
+        var l = parts.length;
+        var partName;
+        for (i; i < l; ++i) {
+            partName = parts[i];
+            result = result[partName] =  result[partName] || {};
+        }
+        return result;
+    }
+    String.prototype.namespace = toNamespace;
+})();
